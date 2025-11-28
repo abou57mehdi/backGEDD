@@ -52,6 +52,11 @@ public class DocumentService {
 	public DocumentEntity getById(UUID id) {
 		return documentRepository.findById(id).orElseThrow();
 	}
+
+	@Transactional(readOnly = true)
+	public java.util.List<DocumentEntity> getAll() {
+		return documentRepository.findAll();
+	}
 }
 
 

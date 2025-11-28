@@ -41,6 +41,8 @@ public class ClassificationService {
 		public String documentType;
 		public String country;
 		public List<String> topics;
+		public String summary;
+		public String entitiesJson;
 	}
 }
 

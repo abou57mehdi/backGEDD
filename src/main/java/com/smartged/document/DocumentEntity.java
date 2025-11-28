@@ -47,7 +47,7 @@ public class DocumentEntity {
 
 	@Column(length = 1024)
 	private String errorMessage;
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "document_auto_tags", joinColumns = @JoinColumn(name = "document_id"))
 	@Column(name = "tag")
 	private List<String> autoTags = new ArrayList<>();
@@ -55,7 +55,7 @@ public class DocumentEntity {
 	@Column(length = 512)
 	private String storagePath;
 
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name = "uploaded_by_user_id")
 	private UserEntity uploadedBy;
 

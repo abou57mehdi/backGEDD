@@ -1,0 +1,60 @@
+ register 201 
+{
+    "id": 1,
+    "username": "testuser",
+    "email": "test@example.com",
+    "passwordHash": "$2a$10$cj85Z8mLyY5VVa5O.cx5teDhzHd9SrJpR.M/yyL0A7WMIdtNB8ILi",
+    "enabled": true,
+    "roles": []
+}
+
+
+
+login 200 
+{
+    "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6W10sInN1YiI6InRlc3R1c2VyIiwiaWF0IjoxNzYzNzU4MDQ2LCJleHAiOjE3NjM3NjE2NDZ9.iIUaiFTBEYioZg4p1DcG0uiZhzPGNvqumw32wzvzZe4",
+    "tokenType": "Bearer"
+} 
+
+
+
+refresh  
+
+{
+    "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc2Mzc1ODU5NywiZXhwIjoxNzYzNzYyMTk3fQ.jLPv9qurP_t6uXYfyZaibHq9zdsUPVy66KjLsPou-94",
+    "tokenType": "Bearer"
+}
+
+
+
+{
+    "id": "41b81322-2e63-42ea-aa93-5a297dac6aef",
+    "filename": "",
+    "sizeBytes": 0,
+    "status": "processing",
+    "uploadedAt": "2025-11-21T21:02:58.837189100Z",
+    "processedAt": null,
+    "documentType": null,
+    "country": null,
+    "autoTags": []
+}
+
+get documents 
+
+[
+    {
+        "id": "41b81322-2e63-42ea-aa93-5a297dac6aef",
+        "filename": "",
+        "sizeBytes": 0,
+        "status": "processing",
+        "uploadedAt": "2025-11-21T21:02:58.837189Z",
+        "processedAt": null,
+        "documentType": null,
+        "country": null,
+        "autoTags": []
+    }
+]
+
+
+
+

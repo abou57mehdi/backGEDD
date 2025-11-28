@@ -11,46 +11,107 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+
+
 import java.io.IOException;
+
+import java.util.List;
+
 import java.util.UUID;
 
+import java.util.stream.Collectors;
+
+
+
 @RestController
+
 @RequestMapping("/documents")
+
 public class DocumentController {
 
+
+
 	private final DocumentService documentService;
+
 	private final NotificationService notificationService;
 
+
+
 	public DocumentController(DocumentService documentService, NotificationService notificationService) {
+
 		this.documentService = documentService;
+
 		this.notificationService = notificationService;
+
 	}
+
+
 
 	@PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+
 	public ResponseEntity<DocumentResponse> upload(
+
 			@AuthenticationPrincipal UserDetails principal,
+
 			@RequestPart("file") MultipartFile file
+
 	) throws IOException {
+
 		DocumentEntity saved = documentService.createOnUpload(principal, file);
+
 		return ResponseEntity.ok(DocumentResponse.from(saved));
+
 	}
+
+
+	@GetMapping
+
+	public ResponseEntity<List<DocumentResponse>> getAll() {
+
+		List<DocumentResponse> documents = documentService.getAll().stream()
+
+				.map(DocumentResponse::from)
+
+				.collect(Collectors.toList());
+
+		return ResponseEntity.ok(documents);
+
+	}
+
+
 
 	@GetMapping("/{id}")
+
 	public ResponseEntity<DocumentResponse> getById(@PathVariable("id") UUID id) {
+
 		DocumentEntity e = documentService.getById(id);
+
 		return ResponseEntity.ok(DocumentResponse.from(e));
+
 	}
+
+
 
 	@GetMapping("/{id}/status")
+
 	public ResponseEntity<StatusResponse> getStatus(@PathVariable("id") UUID id) {
+
 		DocumentEntity e = documentService.getById(id);
+
 		return ResponseEntity.ok(StatusResponse.from(e));
+
 	}
 
+
+
 	@GetMapping(value = "/{id}/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+
 	public SseEmitter streamStatus(@PathVariable("id") UUID id) {
+
 		return notificationService.register(id);
+
 	}
+
 }
 
 

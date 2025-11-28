@@ -11,7 +11,7 @@ import java.util.random.RandomGenerator;
 @Service
 public class SimpleHashEmbeddingService implements EmbeddingService {
 
-	private static final int DIM = 128;
+	private static final int DIM = 768;
 
 	@Override
 	public List<Float> embed(String text) {
@@ -21,7 +21,7 @@ public class SimpleHashEmbeddingService implements EmbeddingService {
 		for (byte b : bytes) {
 			h1 = 31 * h1 + b;
 		}
-		RandomGenerator rng = RandomGenerator.of("L64X128MixRandom").jump(h1);
+		RandomGenerator rng = new java.util.Random(h1);
 		List<Float> vec = new ArrayList<>(DIM);
 		for (int i = 0; i < DIM; i++) {
 			vec.add((float) (rng.nextDouble() * 2 - 1));
